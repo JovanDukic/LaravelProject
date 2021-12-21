@@ -1,5 +1,8 @@
 <?php
 
+use App\CovidTest;
+use App\UserTest;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        factory(User::class, 10)->create();
+
+        CovidTest::create(['name' => 'PCR_Test']);
+        CovidTest::create(['name' => 'QUICK_Test']);
+
+        factory(UserTest::class, 10)->create();
     }
 }

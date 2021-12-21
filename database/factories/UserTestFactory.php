@@ -18,7 +18,7 @@ $factory->define(UserTest::class, function (Faker $faker) {
     return [
         'ambulance' => $ambulances[$ambulanceID],
         'result' => $results[$resultID],
-        'user_id' => $userID,
-        'covid_test_id' => $covidTestID
+        'userID' => $userID,
+        'covidTestID' => $covidTestID
     ];
 });

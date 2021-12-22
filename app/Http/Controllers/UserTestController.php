@@ -81,8 +81,9 @@ class UserTestController extends Controller
      * @param  \App\UserTest  $userTest
      * @return \Illuminate\Http\Response
      */
-    public function show(UserTest $userTest)
+    public function show($userTestID)
     {
+        $userTest = UserTest::find($userTestID);
         return response()->json(['response' => 'Single test view...', 'test' => new UserTestResource($userTest)]);
     }
 
@@ -115,10 +116,12 @@ class UserTestController extends Controller
      * @param  \App\UserTest  $userTest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserTest $userTest)
+    public function destroy($userTestID)
     {
+        $userTest = UserTest::find($userTestID);
+
         if ($userTest->userID != Auth::user()->id) {
-            return response()->json(['response' => "This test doesn't belong to you. You can not delete it!", 'test' => $userTest]);
+            return response()->json(['response' => "This test doesn't belong to you. You can not delete it!", 'test' => new UserTestResource($userTest)]);
         } else if ($userTest->delete()) {
             return response()->json(['response' => 'Test has been successfully deleted!', 'deleted_test' => new UserTestResource($userTest)]);
         } else {

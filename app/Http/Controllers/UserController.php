@@ -75,6 +75,9 @@ class UserController extends Controller
     {
         if ($user->id != Auth::user()->id) {
             return response()->json(['response' => "You can't update account which does not belong to you!"]);
+        } else
+        if ($user->name == "admin" && $user->email == "admin@gmail.com") {
+            return response()->json(['response' => "Admin data can not be changed!"]);
         }
 
         $validator = Validator::make(

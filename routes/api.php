@@ -29,13 +29,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user();
     });
 
-    Route::resource('/users', 'UserController');
+    Route::resource('/users', 'UserController')->only(['index', 'show', 'update', 'destroy']);
 
-    Route::resource('/tests', 'UserTestController')->only(['index', 'store']);
-
-    Route::get('/tests/{id}', [UserTestController::class, 'show']);
-
-    Route::delete('/tests/{id}', [UserTestController::class, 'delete']);
+    Route::resource('/tests', 'UserTestController')->only(['index', 'show', 'store', 'destroy']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
